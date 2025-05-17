@@ -1,5 +1,6 @@
 package com.managmentbackend.task_management_system.controller;
 
+import com.managmentbackend.task_management_system.dto.request.AdminLoginDTO;
 import com.managmentbackend.task_management_system.dto.request.AdminSaveDTO;
 import com.managmentbackend.task_management_system.service.AdminService;
 import com.managmentbackend.task_management_system.util.StandardResponse;
@@ -21,6 +22,15 @@ public class AdminController {
 
         return new ResponseEntity<StandardResponse>(
                 new StandardResponse(200, "Saved", message), HttpStatus.CREATED
+        );
+    }
+
+    @PostMapping(path = "/login")
+    public ResponseEntity<StandardResponse> loginAdmin(@RequestBody AdminLoginDTO adminLoginDTO){
+        String message = adminService.login(adminLoginDTO);
+
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(200, "Logged", message), HttpStatus.OK
         );
     }
 }
